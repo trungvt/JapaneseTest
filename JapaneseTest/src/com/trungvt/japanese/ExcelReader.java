@@ -11,17 +11,18 @@ import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
 public class ExcelReader {
+	private static final int MAX_ROWS = 100;
+
 	public static HashMap<String, Grammar> readExcelFileForHash(String fileUrl)
 			throws IOException {
 		HashMap<String, Grammar> result = new HashMap<>();
 		Sheet sheet = getSheetByDefault(fileUrl);
-		for (int i = 0; i < sheet.getRows(); i++) {
+		for (int i = 0; i < MAX_ROWS; i++) {
 			Cell[] cells = sheet.getRow(i);
-			result.put(
-					cells[0].toString(),
-					new Grammar(cells[0].toString(), cells[1].toString(),
-							cells[2].toString(), cells[3].toString(), cells[4]
-									.toString()));
+			result.put(cells[0].getContents(),
+					new Grammar(cells[0].getContents(), cells[1].getContents(),
+							cells[2].getContents(), cells[3].getContents(),
+							cells[4].getContents()));
 		}
 		return result;
 	}
@@ -30,11 +31,11 @@ public class ExcelReader {
 			throws IOException {
 		ArrayList<Grammar> result = new ArrayList<Grammar>();
 		Sheet sheet = getSheetByDefault(fileUrl);
-		for (int i = 0; i < sheet.getRows(); i++) {
+		for (int i = 0; i < MAX_ROWS; i++) {
 			Cell[] cells = sheet.getRow(i);
-			result.add(new Grammar(cells[0].toString(), cells[1].toString(),
-					cells[2].toString(), cells[3].toString(), cells[4]
-							.toString()));
+			result.add(new Grammar(cells[0].getContents(), cells[1]
+					.getContents(), cells[2].getContents(), cells[3]
+					.getContents(), cells[4].getContents()));
 		}
 		return result;
 	}
