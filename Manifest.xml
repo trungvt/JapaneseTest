@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Sealed: true
+Main-Class: com.trungvt.japanese.Tester
+Class-Path: jxl.jar
