@@ -5,7 +5,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -14,7 +16,15 @@ public class ExcelReader {
 			throws IOException {
 		HashMap<String, Grammar> result = new HashMap<>();
 		XSSFSheet sheet = getSheetByDefault(fileUrl);
-
+		Iterator<Row> rows = sheet.iterator();
+		while (rows.hasNext()) {
+			Row currentRow = rows.next();
+			Grammar currentGrammar = new Grammar(currentRow.getCell(0)
+					.toString(), currentRow.getCell(1).toString(), currentRow
+					.getCell(2).toString(), currentRow.getCell(3).toString(),
+					currentRow.getCell(4).toString());
+			result.put(currentRow.getCell(0).toString(), currentGrammar);
+		}
 		return result;
 	}
 
@@ -22,7 +32,15 @@ public class ExcelReader {
 			throws IOException {
 		ArrayList<Grammar> result = new ArrayList<Grammar>();
 		XSSFSheet sheet = getSheetByDefault(fileUrl);
-
+		Iterator<Row> rows = sheet.iterator();
+		while (rows.hasNext()) {
+			Row currentRow = rows.next();
+			Grammar currentGrammar = new Grammar(currentRow.getCell(0)
+					.toString(), currentRow.getCell(1).toString(), currentRow
+					.getCell(2).toString(), currentRow.getCell(3).toString(),
+					currentRow.getCell(4).toString());
+			result.add(currentGrammar);
+		}
 		return result;
 	}
 
