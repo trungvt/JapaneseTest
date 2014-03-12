@@ -87,7 +87,7 @@ public class Tester {
 					showContent("Opps! No cheat in test class huh!");
 				}
 			}
-			if (input.equalsIgnoreCase(String.valueOf(correctAnswerIndex))) {
+			if (input.equalsIgnoreCase(String.valueOf(correctAnswerIndex + 1))) {
 				showContent("CORRECT");
 				length--;
 				if (mode == TestMode.TEST) {
@@ -97,7 +97,20 @@ public class Tester {
 				showContent(grammarTest.getExample());
 				tempList.remove(grammarTest);
 			} else {
-				
+				showContent("\033[31mWRONG\033[0m");
+				if (mode == TestMode.TEST) {
+					length--;
+					tempList.remove(grammarTest);
+				}
+			}
+		}
+		showContent("************* FINISH " + modeString + " *************");
+		if (mode == TestMode.TEST) {
+			showContent("Test Score: " + score + "/" + totalGrammars);
+			if (score >= Math.floor(grammarList.size() * 2 / 3)) {
+				showContent("PASS");
+			} else {
+				showContent("\033[31mFAIL\033[0m");
 			}
 		}
 	}
